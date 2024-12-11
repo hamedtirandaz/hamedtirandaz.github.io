@@ -1,2 +1,2 @@
-# hamedtirandaz.github.io
+# irandaz.github.io
 Personal Portfolio
