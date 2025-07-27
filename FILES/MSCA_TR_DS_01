@@ -1,0 +1,83 @@
+Here is the comprehensive "Excellence" section covering all six WPs in detail, structured with Introduction, State-of-the-Art, and Objectives subsections:
+
+### 1.1 Introduction: Hybrid Safety Challenges in Multi-Robot Systems  
+Multi-robot systems (MRS) face **fundamental safety limitations** when operating in dynamic, unstructured environments due to three interconnected gaps: (1) **Model-uncertainty propagation** in hybrid robot dynamics (e.g., legged-aerial systems), (2) **distributed coordination fragility** under communication delays and faults , and (3) **tightly coupled perception-control integration** for real-time safety assurance. Current approaches treat safety, planning, and perception as isolated components, leading to catastrophic failures during hardware faults or environmental uncertainties. This project integrates **hybrid dynamics modeling**, **distributed barrier functions**, and **fault-adaptive perception** to establish a unified safety framework for heterogeneous MRS.  
+
+---
+
+### 1.2 State-of-the-Art Analysis and Project Positioning  
+
+#### **WP1: Hybrid Dynamics Modeling & Parameter Identification**  
+**Literature:** Current hybrid models rely on piecewise-continuous dynamics [Ames2019] or learning-based approximations [Lopez2021], but struggle with **real-time parameter identification** during mode transitions (e.g., ground-aerial reconfiguration). Distributed identification methods [Janson2022] assume perfect communication, neglecting delay-induced drift .  
+**Gaps:** No unified framework for **online uncertainty quantification** in heterogeneous MRS with hybrid modes. Delays exacerbate model mismatch during cooperative tasks .  
+
+#### **WP2: Multi-Robot Distributed Safety-Critical Control**  
+**Literature:** Barrier functions (CBFs) enforce safety via constrained optimization [Ames2019]. Distributed CBFs [Taylor2020] ignore communication delays, causing unsafe actions in networked systems . Recent delay-compensation predictors  lack adaptability to dynamic topologies. Graph neural networks (GNNs) show promise for scalable control [Ballotta2025] but lack formal safety guarantees.  
+**Gaps:** Absence of **delay-robust CBFs** with topology adaptation and **GNN-based safety certification** for dynamic teams .  
+
+#### **WP3: Safety Layer with Graph CBFs**  
+**Literature:** Centralized safety filters [Chen2022] fail in distributed MRS. Decentralized CBFs [Vinod2022] handle pairwise collisions but not group constraints (e.g., formation cohesion). GNNs enable topology-aware control , but existing implementations are communication-heavy and lack real-time performance.  
+**Gaps:** No **graph-theoretic safety layers** that encode topological constraints (e.g., connectivity maintenance) via **lightweight GNN-CBF fusion** .  
+
+#### **WP4: Safety-Critical Motion Planning**  
+**Literature:** Sampling-based planners [Čáp2015] lack dynamic constraint integration, while optimization-based methods [Zhou2022] suffer from computational intractability with CBFs. Recent CBF-RRT* variants [Li2023] are limited to static environments. Formation control via complex Laplacian  enables shape transitions but assumes obstacle-free spaces.  
+**Gaps:** Inability to generate **certifiably safe trajectories** for MRS in dynamic environments with **obstacle-aware formation scaling** .  
+
+#### **WP5: Multi-Sensor Perception-Adaptive Control**  
+**Literature:** Visual-inertial odometry dominates perception [Chen2022], but fails under sensor faults. LiDAR-visual fusion [Queralta2020] lacks control integration, causing decision latency. Adaptive control methods [Abbaspour2023] ignore perception uncertainty.  
+**Gaps:** Missing **closed-loop perception-control co-design** with **safety-bound adaptation** to perception confidence .  
+
+#### **WP6: Vision-Integrated Fault Diagnosis & FTC**  
+**Literature:** Model-based FTC [Shames2021] assumes known fault signatures. Learning-aided diagnosis [Vorotnikov2018] lacks temporal consistency guarantees. Distributed FTC architectures  cannot handle simultaneous actuator failures and environmental constraints.  
+**Gaps:** No framework for **visual-lidar fused fault recovery** with **CBF-shielded coordination** under faults .  
+
+*Table 1: Innovation Mapping vs. State-of-the-Art*  
+| **Work Package** | **SOTA Limitation** | **Our Innovation** |  
+|------------------|---------------------|-------------------|  
+| WP1 | Offline hybrid modeling | Online parameter ID with delay compensation |  
+| WP2 | Delay-agnostic CBFs | Predictor-based GNN-CBFs  |  
+| WP3 | Topology-blind safety | Graph CBFs with connectivity preservation |  
+| WP4 | Static-environment planners | Dynamic CBF-RRT* with formation scaling  |  
+| WP5 | Perception-control decoupling | Adaptive CBFs tuned to perception confidence |  
+| WP6 | Passive fault recovery | Active diagnosis-CBF coordination |  
+
+---
+
+### 1.3 Objectives  
+#### **WP1 Objectives**  
+1.  Develop **hybrid dynamical models** with online parameter identifiers for quadruped-aerial robots.  
+2.  Design **distributed uncertainty quantification** protocols resilient to communication delays .  
+3.  Achieve <5% model error under mode transitions in hardware experiments.  
+
+#### **WP2 Objectives**  
+1.  Create **delay-compensating CBFs** using GNNs for topology-adaptive safety .  
+2.  Integrate **AoI (Age-of-Information)**-based state predictors with distributed optimization.  
+3.  Guarantee collision avoidance under 500ms delays via numerical validation.  
+
+#### **WP3 Objectives**  
+1.  Synthesize **graph CBFs (GCBFs)** encoding connectivity, collision, and task constraints.  
+2.  Develop a **real-time safety layer** with <10ms execution time per robot.  
+3.  Validate in 20-robot swarms with dynamic topology changes.  
+
+#### **WP4 Objectives**  
+1.  Combine **CBF-RRT*** with complex Laplacian-based formations for obstacle-aware scaling .  
+2.  Enable autonomous corridor navigation via **formation contraction protocols**.  
+3.  Achieve 100% safety in cluttered environments (DARPA SubT benchmarks).  
+
+#### **WP5 Objectives**  
+1.  Build **perception-adaptive CBFs** that tighten/relax safety bounds based on sensor confidence.  
+2.  Integrate LiDAR-visual fusion with distributed control via **embedded tensor processing**.  
+3.  Reduce perception-induced safety violations by ≥90% in low-light scenarios.  
+
+#### **WP6 Objectives**  
+1.  Develop **vision-lidar temporal fusion** for real-time fault diagnosis.  
+2.  Design **CBF-shielded FTC** that reallocates tasks during actuator failures.  
+3.  Maintain >95% mission success under simultaneous faults in 3+ robots.  
+
+*Project Integration Objective:*  
+Unify WP1–WP6 into a **field-tested safety architecture** demonstrating:  
+- **End-to-end safety guarantees** for heterogeneous MRS in disaster response scenarios  
+- **50% faster replanning** vs. SOTA methods under communication faults  
+- Open-source release of **GCBF Toolkit** for community adoption  
+
+This integrated approach bridges **modeling robustness**, **delayed control synthesis**, and **perception-aware recovery** to advance MRS safety beyond isolated SOTA capabilities .
